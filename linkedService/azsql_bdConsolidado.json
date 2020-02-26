@@ -1,0 +1,19 @@
+{
+	"name": "azsql_bdConsolidado",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"connectionString": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=srv-corp-mssql-prod.database.windows.net;Initial Catalog=bdConsolidado;User ID=admsrvmssql",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "kv_Credentials",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "AdmSQL-Credential"
+			}
+		}
+	}
+}
