@@ -103,11 +103,6 @@
 									"name": "HIERARQUIA",
 									"type": "String"
 								}
-							},
-							{
-								"sink": {
-									"name": ""
-								}
 							}
 						]
 					}
