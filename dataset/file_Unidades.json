@@ -1,0 +1,56 @@
+{
+	"name": "file_Unidades",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "blob_Cargas_DataFactory",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "unidades.CSV",
+				"container": "cadastrosgerais"
+			},
+			"columnDelimiter": ";",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "#",
+				"type": "String"
+			},
+			{
+				"name": "HIERARQUIA",
+				"type": "String"
+			},
+			{
+				"name": "CNPJ",
+				"type": "String"
+			},
+			{
+				"name": "RAZAO_SOCIAL",
+				"type": "String"
+			},
+			{
+				"name": "ENDERECO",
+				"type": "String"
+			},
+			{
+				"name": "BAIRRO",
+				"type": "String"
+			},
+			{
+				"name": "CIDADE",
+				"type": "String"
+			},
+			{
+				"name": "CEP",
+				"type": "String"
+			}
+		]
+	}
+}
