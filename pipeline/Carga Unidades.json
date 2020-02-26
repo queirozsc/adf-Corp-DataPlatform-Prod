@@ -121,6 +121,9 @@
 				]
 			}
 		],
+		"folder": {
+			"name": "Cadastros Gerais"
+		},
 		"annotations": []
 	}
 }
