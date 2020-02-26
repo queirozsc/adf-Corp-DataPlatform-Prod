@@ -35,6 +35,12 @@
 			{
 				"name": "HIERARQUIA",
 				"type": "varchar"
+			},
+			{
+				"name": "DATA_CARGA",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
 			}
 		],
 		"typeProperties": {
