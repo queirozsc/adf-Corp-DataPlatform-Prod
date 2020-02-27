@@ -1,0 +1,51 @@
+{
+	"name": "table_Unidades",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "azsql_bdConsolidado",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "CNPJ",
+				"type": "varchar"
+			},
+			{
+				"name": "RAZAO_SOCIAL",
+				"type": "varchar"
+			},
+			{
+				"name": "ENDERECO",
+				"type": "varchar"
+			},
+			{
+				"name": "BAIRRO",
+				"type": "varchar"
+			},
+			{
+				"name": "CIDADE",
+				"type": "varchar"
+			},
+			{
+				"name": "CEP",
+				"type": "varchar"
+			},
+			{
+				"name": "HIERARQUIA",
+				"type": "varchar"
+			},
+			{
+				"name": "DATA_CARGA",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "tbUNIDADES"
+		}
+	}
+}
