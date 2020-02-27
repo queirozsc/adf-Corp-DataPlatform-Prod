@@ -7,6 +7,18 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "adf-Corp-DataPlatform-Prod"
 		},
+		"bdConsolidado_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'bdConsolidado'"
+		},
+		"blob_Cargas_DataFactory_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'blob_Cargas_DataFactory'"
+		},
+		"azsql_bdConsolidado_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'azsql_bdConsolidado'"
+		},
 		"kv_Credentials_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://Corp-Credentials.vault.azure.net/"
@@ -37,6 +49,15 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"blob_Cargas_DataFactory_connectionString": {
+						"value": "[parameters('blob_Cargas_DataFactory_connectionString')]"
+					},
+					"bdConsolidado_connectionString": {
+						"value": "[parameters('bdConsolidado_connectionString')]"
+					},
+					"azsql_bdConsolidado_connectionString": {
+						"value": "[parameters('azsql_bdConsolidado_connectionString')]"
 					},
 					"kv_Credentials_properties_typeProperties_baseUrl": {
 						"value": "[parameters('kv_Credentials_properties_typeProperties_baseUrl')]"

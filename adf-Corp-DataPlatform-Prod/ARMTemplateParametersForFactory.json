@@ -5,6 +5,15 @@
 		"factoryName": {
 			"value": "adf-Corp-DataPlatform-Prod"
 		},
+		"bdConsolidado_connectionString": {
+			"value": ""
+		},
+		"blob_Cargas_DataFactory_connectionString": {
+			"value": ""
+		},
+		"azsql_bdConsolidado_connectionString": {
+			"value": ""
+		},
 		"kv_Credentials_properties_typeProperties_baseUrl": {
 			"value": "https://Corp-Credentials.vault.azure.net/"
 		}
