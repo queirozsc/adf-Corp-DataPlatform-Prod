@@ -27,7 +27,6 @@
 					},
 					"sink": {
 						"type": "AzureSqlSink",
-						"preCopyScript": "TRUNCATE TABLE DBO.tbUNIDADES",
 						"disableMetricsCollection": false
 					},
 					"enableStaging": false,
