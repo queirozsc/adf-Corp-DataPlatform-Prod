@@ -2,7 +2,7 @@
 	"name": "trg-blob-cadastrosgerais",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Stopped",
+		"runtimeState": "Started",
 		"pipelines": [
 			{
 				"pipelineReference": {
