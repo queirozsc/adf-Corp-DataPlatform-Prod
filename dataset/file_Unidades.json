@@ -13,7 +13,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "unidades.CSV",
+				"fileName": "UNIDADES.CSV",
 				"container": "cadastrosgerais"
 			},
 			"columnDelimiter": ";",
