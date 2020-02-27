@@ -5,17 +5,17 @@
 		"factoryName": {
 			"value": "adf-Corp-DataPlatform-Prod"
 		},
-		"bdConsolidado_connectionString": {
+		"azsql_bdConsolidado_connectionString": {
 			"value": ""
 		},
 		"blob_Cargas_DataFactory_connectionString": {
 			"value": ""
 		},
-		"azsql_bdConsolidado_connectionString": {
-			"value": ""
-		},
 		"kv_Credentials_properties_typeProperties_baseUrl": {
 			"value": "https://Corp-Credentials.vault.azure.net/"
+		},
+		"trg-blob-cadastrosgerais_properties_typeProperties_scope": {
+			"value": "/subscriptions/0005ad7d-3766-4f17-b767-5c76e7c45f15/resourceGroups/rg-Corp-DataPlatform-Prod/providers/Microsoft.Storage/storageAccounts/cargasdatafactory"
 		},
 		"containerUri": {
 			"value": ""

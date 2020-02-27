@@ -11,10 +11,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'blob_Cargas_DataFactory'"
 		},
-		"bdConsolidado_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'bdConsolidado'"
-		},
 		"azsql_bdConsolidado_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'azsql_bdConsolidado'"
@@ -22,25 +18,16 @@
 		"kv_Credentials_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://Corp-Credentials.vault.azure.net/"
+		},
+		"trg-blob-cadastrosgerais_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/0005ad7d-3766-4f17-b767-5c76e7c45f15/resourceGroups/rg-Corp-DataPlatform-Prod/providers/Microsoft.Storage/storageAccounts/cargasdatafactory"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
-		{
-			"name": "[concat(parameters('factoryName'), '/kv_Credentials')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureKeyVault",
-				"typeProperties": {
-					"baseUrl": "[parameters('kv_Credentials_properties_typeProperties_baseUrl')]"
-				}
-			},
-			"dependsOn": []
-		},
 		{
 			"name": "[concat(parameters('factoryName'), '/blob_Cargas_DataFactory')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -55,36 +42,80 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ir-Gateway-DataPlatform-Prod')]",
-			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "SelfHosted",
-				"typeProperties": {}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/bdConsolidado')]",
+			"name": "[concat(parameters('factoryName'), '/kv_Credentials')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"type": "AzureSqlDatabase",
+				"type": "AzureKeyVault",
 				"typeProperties": {
-					"connectionString": "[parameters('bdConsolidado_connectionString')]",
-					"password": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "kv_Credentials",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "AdmSQL-Credential"
-					}
+					"baseUrl": "[parameters('kv_Credentials_properties_typeProperties_baseUrl')]"
 				}
 			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/file_Unidades')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "blob_Cargas_DataFactory",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Blob Storage"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "UNIDADES.CSV",
+						"container": "cadastrosgerais"
+					},
+					"columnDelimiter": ";",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "#",
+						"type": "String"
+					},
+					{
+						"name": "HIERARQUIA",
+						"type": "String"
+					},
+					{
+						"name": "CNPJ",
+						"type": "String"
+					},
+					{
+						"name": "RAZAO_SOCIAL",
+						"type": "String"
+					},
+					{
+						"name": "ENDERECO",
+						"type": "String"
+					},
+					{
+						"name": "BAIRRO",
+						"type": "String"
+					},
+					{
+						"name": "CIDADE",
+						"type": "String"
+					},
+					{
+						"name": "CEP",
+						"type": "String"
+					}
+				]
+			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/kv_Credentials')]"
+				"[concat(variables('factoryId'), '/linkedServices/blob_Cargas_DataFactory')]"
 			]
 		},
 		{
@@ -164,6 +195,174 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/azsql_bdConsolidado')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Carga Unidades')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copia Unidades",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "TRUNCATE TABLE DBO.tbUNIDADES",
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"enableSkipIncompatibleRow": true,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "CNPJ",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CNPJ",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "RAZAO_SOCIAL",
+											"type": "String"
+										},
+										"sink": {
+											"name": "RAZAO_SOCIAL",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ENDERECO",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ENDERECO",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "BAIRRO",
+											"type": "String"
+										},
+										"sink": {
+											"name": "BAIRRO",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "CIDADE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CIDADE",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "CEP",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CEP",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "HIERARQUIA",
+											"type": "String"
+										},
+										"sink": {
+											"name": "HIERARQUIA",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "file_Unidades",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "table_Unidades",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"folder": {
+					"name": "Cadastros Gerais"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/file_Unidades')]",
+				"[concat(variables('factoryId'), '/datasets/table_Unidades')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/trg-blob-cadastrosgerais')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "Carga Unidades",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/cadastrosgerais/blobs/",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('trg-blob-cadastrosgerais_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/Carga Unidades')]"
 			]
 		}
 	]

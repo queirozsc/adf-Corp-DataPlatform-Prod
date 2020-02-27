@@ -7,21 +7,21 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "adf-Corp-DataPlatform-Prod"
 		},
-		"bdConsolidado_connectionString": {
+		"azsql_bdConsolidado_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'bdConsolidado'"
+			"metadata": "Secure string for 'connectionString' of 'azsql_bdConsolidado'"
 		},
 		"blob_Cargas_DataFactory_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'blob_Cargas_DataFactory'"
 		},
-		"azsql_bdConsolidado_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'azsql_bdConsolidado'"
-		},
 		"kv_Credentials_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://Corp-Credentials.vault.azure.net/"
+		},
+		"trg-blob-cadastrosgerais_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/0005ad7d-3766-4f17-b767-5c76e7c45f15/resourceGroups/rg-Corp-DataPlatform-Prod/providers/Microsoft.Storage/storageAccounts/cargasdatafactory"
 		},
 		"containerUri": {
 			"type": "string",
@@ -53,14 +53,14 @@
 					"blob_Cargas_DataFactory_connectionString": {
 						"value": "[parameters('blob_Cargas_DataFactory_connectionString')]"
 					},
-					"bdConsolidado_connectionString": {
-						"value": "[parameters('bdConsolidado_connectionString')]"
-					},
 					"azsql_bdConsolidado_connectionString": {
 						"value": "[parameters('azsql_bdConsolidado_connectionString')]"
 					},
 					"kv_Credentials_properties_typeProperties_baseUrl": {
 						"value": "[parameters('kv_Credentials_properties_typeProperties_baseUrl')]"
+					},
+					"trg-blob-cadastrosgerais_properties_typeProperties_scope": {
+						"value": "[parameters('trg-blob-cadastrosgerais_properties_typeProperties_scope')]"
 					}
 				}
 			},
