@@ -1,9 +1,9 @@
 {
-	"name": "Carga Unidades",
+	"name": "pipe-Atualiza-Unidades",
 	"properties": {
 		"activities": [
 			{
-				"name": "Copia Unidades",
+				"name": "task-Copia-Unidades",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -110,20 +110,20 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "file_Unidades",
+						"referenceName": "blob_Unidades",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "table_Unidades",
+						"referenceName": "tabela_Unidades",
 						"type": "DatasetReference"
 					}
 				]
 			}
 		],
 		"folder": {
-			"name": "Cadastros Gerais"
+			"name": "Logic Apps Triggers"
 		},
 		"annotations": []
 	}
