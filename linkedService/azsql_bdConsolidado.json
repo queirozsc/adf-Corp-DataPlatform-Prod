@@ -12,7 +12,7 @@
 					"referenceName": "kv_Credentials",
 					"type": "LinkedServiceReference"
 				},
-				"secretName": "AdmSQL-Credential"
+				"secretName": "cred-admsql-azure"
 			}
 		}
 	}
