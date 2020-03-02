@@ -12,7 +12,7 @@
 					"referenceName": "kv_Credentials",
 					"type": "LinkedServiceReference"
 				},
-				"secretName": "cred-ora-tasy"
+				"secretName": "cred-admora-tasy"
 			}
 		},
 		"connectVia": {
