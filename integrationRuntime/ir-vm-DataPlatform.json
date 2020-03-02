@@ -1,0 +1,6 @@
+{
+	"name": "ir-vm-DataPlatform",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}
