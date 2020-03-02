@@ -1,0 +1,23 @@
+{
+	"name": "mssql_Smart_HOSL",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"connectionString": "Integrated Security=False;Data Source=192.168.82.210;Initial Catalog=SMART;User ID=smart",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "kv_Credentials",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "cred-admsql-hosl"
+			}
+		},
+		"connectVia": {
+			"referenceName": "ir-vm-DataPlatform",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

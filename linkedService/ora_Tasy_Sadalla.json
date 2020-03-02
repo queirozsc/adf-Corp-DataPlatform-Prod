@@ -1,0 +1,23 @@
+{
+	"name": "ora_Tasy_Sadalla",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "Oracle",
+		"typeProperties": {
+			"connectionString": "host=10.102.0.17;port=1521;serviceName=tasy;user id=tasy",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "kv_Credentials",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "cred-admora-tasy"
+			}
+		},
+		"connectVia": {
+			"referenceName": "ir-vm-DataPlatform",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
