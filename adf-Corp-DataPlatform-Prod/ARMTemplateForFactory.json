@@ -15,13 +15,25 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'blob_Cargas_DataFactory'"
 		},
+		"mssql_Smart_Dayhorc_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'mssql_Smart_Dayhorc'"
+		},
+		"mssql_Smart_HOSL_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'mssql_Smart_HOSL'"
+		},
+		"ora_Tasy_Cloud_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ora_Tasy_Cloud'"
+		},
+		"ora_Tasy_Sadalla_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ora_Tasy_Sadalla'"
+		},
 		"kv_Credentials_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://Corp-Credentials.vault.azure.net/"
-		},
-		"trg-blob-cadastrosgerais_properties_typeProperties_scope": {
-			"type": "string",
-			"defaultValue": "/subscriptions/0005ad7d-3766-4f17-b767-5c76e7c45f15/resourceGroups/rg-Corp-DataPlatform-Prod/providers/Microsoft.Storage/storageAccounts/cargasdatafactory"
 		}
 	},
 	"variables": {
@@ -29,13 +41,13 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/Carga Unidades')]",
+			"name": "[concat(parameters('factoryName'), '/pipe-Atualiza-Unidades')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
-						"name": "Copia Unidades",
+						"name": "task-Copia-Unidades",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
@@ -142,14 +154,14 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "file_Unidades",
+								"referenceName": "blob_Unidades",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "table_Unidades",
+								"referenceName": "tabela_Unidades",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -157,17 +169,17 @@
 					}
 				],
 				"folder": {
-					"name": "Cadastros Gerais"
+					"name": "Logic Apps Triggers"
 				},
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/file_Unidades')]",
-				"[concat(variables('factoryId'), '/datasets/table_Unidades')]"
+				"[concat(variables('factoryId'), '/datasets/blob_Unidades')]",
+				"[concat(variables('factoryId'), '/datasets/tabela_Unidades')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/file_Unidades')]",
+			"name": "[concat(parameters('factoryName'), '/blob_Unidades')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -231,7 +243,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/table_Unidades')]",
+			"name": "[concat(parameters('factoryName'), '/tabela_Unidades')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -301,7 +313,7 @@
 							"referenceName": "kv_Credentials",
 							"type": "LinkedServiceReference"
 						},
-						"secretName": "AdmSQL-Credential"
+						"secretName": "cred-admsql-azure"
 					}
 				}
 			},
@@ -317,10 +329,20 @@
 				"annotations": [],
 				"type": "AzureBlobStorage",
 				"typeProperties": {
-					"connectionString": "[parameters('blob_Cargas_DataFactory_connectionString')]"
+					"connectionString": "[parameters('blob_Cargas_DataFactory_connectionString')]",
+					"accountKey": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "kv_Credentials",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "cred-sto-cargas-accesskey"
+					}
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/kv_Credentials')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/kv_Credentials')]",
@@ -336,34 +358,126 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/trg-blob-cadastrosgerais')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
+			"name": "[concat(parameters('factoryName'), '/mssql_Smart_Dayhorc')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "Carga Unidades",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "BlobEventsTrigger",
+				"type": "SqlServer",
 				"typeProperties": {
-					"blobPathBeginsWith": "/cadastrosgerais/blobs/",
-					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('trg-blob-cadastrosgerais_properties_typeProperties_scope')]",
-					"events": [
-						"Microsoft.Storage.BlobCreated"
-					]
+					"connectionString": "[parameters('mssql_Smart_Dayhorc_connectionString')]",
+					"password": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "kv_Credentials",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "cred-admsql-dayhorc"
+					}
+				},
+				"connectVia": {
+					"referenceName": "ir-vm-DataPlatform",
+					"type": "IntegrationRuntimeReference"
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/Carga Unidades')]"
+				"[concat(variables('factoryId'), '/integrationRuntimes/ir-vm-DataPlatform')]",
+				"[concat(variables('factoryId'), '/linkedServices/kv_Credentials')]"
 			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/mssql_Smart_HOSL')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('mssql_Smart_HOSL_connectionString')]",
+					"password": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "kv_Credentials",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "cred-admsql-hosl"
+					}
+				},
+				"connectVia": {
+					"referenceName": "ir-vm-DataPlatform",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/ir-vm-DataPlatform')]",
+				"[concat(variables('factoryId'), '/linkedServices/kv_Credentials')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ora_Tasy_Cloud')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "Oracle",
+				"typeProperties": {
+					"connectionString": "[parameters('ora_Tasy_Cloud_connectionString')]",
+					"password": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "kv_Credentials",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "cred-admora-tasy"
+					}
+				},
+				"connectVia": {
+					"referenceName": "ir-vm-DataPlatform",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/ir-vm-DataPlatform')]",
+				"[concat(variables('factoryId'), '/linkedServices/kv_Credentials')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ora_Tasy_Sadalla')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "Oracle",
+				"typeProperties": {
+					"connectionString": "[parameters('ora_Tasy_Sadalla_connectionString')]",
+					"password": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "kv_Credentials",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "cred-admora-tasy"
+					}
+				},
+				"connectVia": {
+					"referenceName": "ir-vm-DataPlatform",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/ir-vm-DataPlatform')]",
+				"[concat(variables('factoryId'), '/linkedServices/kv_Credentials')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ir-vm-DataPlatform')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {}
+			},
+			"dependsOn": []
 		}
 	]
 }
