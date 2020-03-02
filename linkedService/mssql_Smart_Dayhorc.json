@@ -1,0 +1,23 @@
+{
+	"name": "mssql_Smart_Dayhorc",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"connectionString": "Integrated Security=False;Data Source=10.0.70.252;Initial Catalog=SmartDB;User ID=sa",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "kv_Credentials",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "cred-admsql-dayhorc"
+			}
+		},
+		"connectVia": {
+			"referenceName": "ir-vm-DataPlatform",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
