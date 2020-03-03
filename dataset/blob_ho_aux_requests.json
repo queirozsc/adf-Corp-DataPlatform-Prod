@@ -1,0 +1,319 @@
+{
+	"name": "blob_ho_aux_requests",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "blob_Cargas_DataFactory",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Blob Storage"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "ho_aux_request.csv",
+				"container": "requestia"
+			},
+			"columnDelimiter": ";",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "REQUEST",
+				"type": "String"
+			},
+			{
+				"name": "CLIENT",
+				"type": "String"
+			},
+			{
+				"name": "ORIGANAL",
+				"type": "String"
+			},
+			{
+				"name": "CURRANAL",
+				"type": "String"
+			},
+			{
+				"name": "GROUPANAL",
+				"type": "String"
+			},
+			{
+				"name": "LASTANAL",
+				"type": "String"
+			},
+			{
+				"name": "LASTANLGRP",
+				"type": "String"
+			},
+			{
+				"name": "ORIGGROUP",
+				"type": "String"
+			},
+			{
+				"name": "CURRGROUP",
+				"type": "String"
+			},
+			{
+				"name": "LASTGROUP",
+				"type": "String"
+			},
+			{
+				"name": "GRGROUP",
+				"type": "String"
+			},
+			{
+				"name": "CATEGORY",
+				"type": "String"
+			},
+			{
+				"name": "RPRIORITY",
+				"type": "String"
+			},
+			{
+				"name": "PRODUCT",
+				"type": "String"
+			},
+			{
+				"name": "PROCESS",
+				"type": "String"
+			},
+			{
+				"name": "PROBLEM",
+				"type": "String"
+			},
+			{
+				"name": "RSTATUS",
+				"type": "String"
+			},
+			{
+				"name": "REQTYPE",
+				"type": "String"
+			},
+			{
+				"name": "REQSOURCE",
+				"type": "String"
+			},
+			{
+				"name": "LOCATION",
+				"type": "String"
+			},
+			{
+				"name": "ORGUNIT",
+				"type": "String"
+			},
+			{
+				"name": "ORGUNIT_ROOT",
+				"type": "String"
+			},
+			{
+				"name": "CHARGE",
+				"type": "String"
+			},
+			{
+				"name": "SLEVEL",
+				"type": "String"
+			},
+			{
+				"name": "EQUIP",
+				"type": "String"
+			},
+			{
+				"name": "RESOURCEID",
+				"type": "String"
+			},
+			{
+				"name": "REQUESTOR",
+				"type": "String"
+			},
+			{
+				"name": "OPENDATE",
+				"type": "String"
+			},
+			{
+				"name": "CLOSEDATE",
+				"type": "String"
+			},
+			{
+				"name": "CLOSED",
+				"type": "String"
+			},
+			{
+				"name": "LASTACTION",
+				"type": "String"
+			},
+			{
+				"name": "LASTANALYST",
+				"type": "String"
+			},
+			{
+				"name": "LASTSTATUS",
+				"type": "String"
+			},
+			{
+				"name": "LASTPRIORITY",
+				"type": "String"
+			},
+			{
+				"name": "LASTREOPEN",
+				"type": "String"
+			},
+			{
+				"name": "LASTACTIONATEND",
+				"type": "String"
+			},
+			{
+				"name": "LASTACTTYPE",
+				"type": "String"
+			},
+			{
+				"name": "RESPDATE",
+				"type": "String"
+			},
+			{
+				"name": "TEMPO_RESOLUCAO",
+				"type": "String"
+			},
+			{
+				"name": "PRAZO_RESL",
+				"type": "String"
+			},
+			{
+				"name": "TEMPO_REPOSTA",
+				"type": "String"
+			},
+			{
+				"name": "PRAZO_RESP",
+				"type": "String"
+			},
+			{
+				"name": "RESPTIME",
+				"type": "String"
+			},
+			{
+				"name": "RESLTIME",
+				"type": "String"
+			},
+			{
+				"name": "RESPMINS",
+				"type": "String"
+			},
+			{
+				"name": "RESLMINS",
+				"type": "String"
+			},
+			{
+				"name": "RESPREMAINS",
+				"type": "String"
+			},
+			{
+				"name": "RESLREMAINS",
+				"type": "String"
+			},
+			{
+				"name": "RESPMODE",
+				"type": "String"
+			},
+			{
+				"name": "RESLMODE",
+				"type": "String"
+			},
+			{
+				"name": "NOCOMPUTE",
+				"type": "String"
+			},
+			{
+				"name": "RLOCKED",
+				"type": "String"
+			},
+			{
+				"name": "ESTIMCOST",
+				"type": "String"
+			},
+			{
+				"name": "TOTALCOST",
+				"type": "String"
+			},
+			{
+				"name": "APROVANLTYPE",
+				"type": "String"
+			},
+			{
+				"name": "APROVANALYST",
+				"type": "String"
+			},
+			{
+				"name": "APROVCLITYPE",
+				"type": "String"
+			},
+			{
+				"name": "MLEVELAPROV",
+				"type": "String"
+			},
+			{
+				"name": "CLIENTAPROV",
+				"type": "String"
+			},
+			{
+				"name": "PACKAGE",
+				"type": "String"
+			},
+			{
+				"name": "PROJECT",
+				"type": "String"
+			},
+			{
+				"name": "WORKFLOW",
+				"type": "String"
+			},
+			{
+				"name": "REQWORKFLOW",
+				"type": "String"
+			},
+			{
+				"name": "ORIGCATEGORY",
+				"type": "String"
+			},
+			{
+				"name": "ORIGPRODUCT",
+				"type": "String"
+			},
+			{
+				"name": "ORIGPROCESS",
+				"type": "String"
+			},
+			{
+				"name": "TOTALATTACH",
+				"type": "String"
+			},
+			{
+				"name": "TOTALATTACHACT",
+				"type": "String"
+			},
+			{
+				"name": "INSERTDATE",
+				"type": "String"
+			},
+			{
+				"name": "QFORM",
+				"type": "String"
+			},
+			{
+				"name": "QSURVEY",
+				"type": "String"
+			},
+			{
+				"name": "QSESSIONFORM",
+				"type": "String"
+			},
+			{
+				"name": "QSESSIONSURVEY",
+				"type": "String"
+			}
+		]
+	}
+}
