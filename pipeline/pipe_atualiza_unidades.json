@@ -1,9 +1,9 @@
 {
-	"name": "pipe-Atualiza-Unidades",
+	"name": "pipe_atualiza_unidades",
 	"properties": {
 		"activities": [
 			{
-				"name": "task-Copia-Unidades",
+				"name": "Copia unidades",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -110,7 +110,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "blob_Unidades",
+						"referenceName": "blob_unidades",
 						"type": "DatasetReference"
 					}
 				],
