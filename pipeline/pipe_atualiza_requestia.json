@@ -95,8 +95,12 @@
 								}
 							},
 							{
+								"source": {
+									"name": "LASTANLGRP",
+									"type": "String"
+								},
 								"sink": {
-									"name": "lastanalgrp",
+									"name": "lastanlgrp",
 									"type": "String"
 								}
 							},
@@ -201,6 +205,10 @@
 								}
 							},
 							{
+								"source": {
+									"name": "LOCATION",
+									"type": "String"
+								},
 								"sink": {
 									"name": "reqlocation",
 									"type": "String"
@@ -438,7 +446,7 @@
 							},
 							{
 								"source": {
-									"name": "REQWORKFLOW",
+									"name": "WORKFLOW",
 									"type": "String"
 								},
 								"sink": {
@@ -524,12 +532,6 @@
 								"sink": {
 									"name": "qsessionsurvey",
 									"type": "String"
-								}
-							},
-							{
-								"sink": {
-									"name": "data_processamento",
-									"type": "DateTime"
 								}
 							}
 						]
