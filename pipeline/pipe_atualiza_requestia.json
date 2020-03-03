@@ -549,8 +549,116 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Copia SLA Chamados",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Copia Chamados",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "TRUNCATE TABLE dbo.ho_aux_requests",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "REQUEST",
+									"type": "String"
+								},
+								"sink": {
+									"name": "request",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "TEMPO_RESOLUCAO",
+									"type": "String"
+								},
+								"sink": {
+									"name": "tempo_resolucao",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PRAZO_RESL",
+									"type": "String"
+								},
+								"sink": {
+									"name": "prazo_resl",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "TEMPO_REPOSTA",
+									"type": "String"
+								},
+								"sink": {
+									"name": "tempo_resposta",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PRAZO_RESP",
+									"type": "String"
+								},
+								"sink": {
+									"name": "prazo_resp",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "blob_ho_aux_requests",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "tabela_ho_aux_requests",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
+		"folder": {
+			"name": "Logic Apps Triggers"
+		},
 		"annotations": []
 	}
 }
