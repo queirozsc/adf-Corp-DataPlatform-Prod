@@ -4,6 +4,7 @@
 		"activities": [
 			{
 				"name": "Copia Chamados",
+				"description": "Copia os dados do Azure Storage Account para o Azure SQL Server",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -552,6 +553,7 @@
 			},
 			{
 				"name": "Copia SLA Chamados",
+				"description": "Copia os dados do Azure Storage Account para o Azure SQL Server",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -654,6 +656,27 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Transforma Chamados",
+				"description": "Normaliza valores da tabela requests",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Copia SLA Chamados",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": []
 			}
 		],
 		"folder": {
