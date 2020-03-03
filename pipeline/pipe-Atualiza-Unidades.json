@@ -116,7 +116,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "tabela_Unidades",
+						"referenceName": "tabela_unidade_negocio",
 						"type": "DatasetReference"
 					}
 				]
