@@ -1,5 +1,5 @@
 {
-	"name": "blob_Unidades",
+	"name": "blob_unidades",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "blob_Cargas_DataFactory",
