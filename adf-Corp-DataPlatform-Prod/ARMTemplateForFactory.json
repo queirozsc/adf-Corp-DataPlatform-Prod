@@ -71,7 +71,7 @@
 							},
 							"sink": {
 								"type": "AzureSqlSink",
-								"preCopyScript": "TRUNCATE TABLE DBO.tbUNIDADES",
+								"preCopyScript": "TRUNCATE TABLE dbo.unidade_negocio",
 								"disableMetricsCollection": false
 							},
 							"enableStaging": false,
@@ -85,7 +85,7 @@
 											"type": "String"
 										},
 										"sink": {
-											"name": "CNPJ",
+											"name": "cnpj",
 											"type": "String"
 										}
 									},
@@ -95,7 +95,7 @@
 											"type": "String"
 										},
 										"sink": {
-											"name": "RAZAO_SOCIAL",
+											"name": "razao_social",
 											"type": "String"
 										}
 									},
@@ -105,7 +105,7 @@
 											"type": "String"
 										},
 										"sink": {
-											"name": "ENDERECO",
+											"name": "endereco",
 											"type": "String"
 										}
 									},
@@ -115,7 +115,7 @@
 											"type": "String"
 										},
 										"sink": {
-											"name": "BAIRRO",
+											"name": "bairro",
 											"type": "String"
 										}
 									},
@@ -125,7 +125,7 @@
 											"type": "String"
 										},
 										"sink": {
-											"name": "CIDADE",
+											"name": "cidade",
 											"type": "String"
 										}
 									},
@@ -135,7 +135,7 @@
 											"type": "String"
 										},
 										"sink": {
-											"name": "CEP",
+											"name": "cep",
 											"type": "String"
 										}
 									},
@@ -145,7 +145,7 @@
 											"type": "String"
 										},
 										"sink": {
-											"name": "HIERARQUIA",
+											"name": "hierarquia",
 											"type": "String"
 										}
 									}
@@ -161,7 +161,7 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "tabela_Unidades",
+								"referenceName": "tabela_unidade_negocio",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -175,7 +175,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/blob_Unidades')]",
-				"[concat(variables('factoryId'), '/datasets/tabela_Unidades')]"
+				"[concat(variables('factoryId'), '/datasets/tabela_unidade_negocio')]"
 			]
 		},
 		{
@@ -243,7 +243,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/tabela_Unidades')]",
+			"name": "[concat(parameters('factoryName'), '/tabela_unidade_negocio')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -255,35 +255,35 @@
 				"type": "AzureSqlTable",
 				"schema": [
 					{
-						"name": "CNPJ",
+						"name": "cnpj",
 						"type": "varchar"
 					},
 					{
-						"name": "RAZAO_SOCIAL",
+						"name": "razao_social",
 						"type": "varchar"
 					},
 					{
-						"name": "ENDERECO",
+						"name": "endereco",
 						"type": "varchar"
 					},
 					{
-						"name": "BAIRRO",
+						"name": "bairro",
 						"type": "varchar"
 					},
 					{
-						"name": "CIDADE",
+						"name": "cidade",
 						"type": "varchar"
 					},
 					{
-						"name": "CEP",
+						"name": "cep",
 						"type": "varchar"
 					},
 					{
-						"name": "HIERARQUIA",
+						"name": "hierarquia",
 						"type": "varchar"
 					},
 					{
-						"name": "DATA_CARGA",
+						"name": "data_processamento",
 						"type": "datetime",
 						"precision": 23,
 						"scale": 3
@@ -291,7 +291,7 @@
 				],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "tbUNIDADES"
+					"table": "unidade_negocio"
 				}
 			},
 			"dependsOn": [
