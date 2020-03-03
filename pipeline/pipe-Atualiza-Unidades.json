@@ -27,7 +27,7 @@
 					},
 					"sink": {
 						"type": "AzureSqlSink",
-						"preCopyScript": "TRUNCATE TABLE DBO.tbUNIDADES",
+						"preCopyScript": "TRUNCATE TABLE dbo.unidade_negocio",
 						"disableMetricsCollection": false
 					},
 					"enableStaging": false,
@@ -41,7 +41,7 @@
 									"type": "String"
 								},
 								"sink": {
-									"name": "CNPJ",
+									"name": "cnpj",
 									"type": "String"
 								}
 							},
@@ -51,7 +51,7 @@
 									"type": "String"
 								},
 								"sink": {
-									"name": "RAZAO_SOCIAL",
+									"name": "razao_social",
 									"type": "String"
 								}
 							},
@@ -61,7 +61,7 @@
 									"type": "String"
 								},
 								"sink": {
-									"name": "ENDERECO",
+									"name": "endereco",
 									"type": "String"
 								}
 							},
@@ -71,7 +71,7 @@
 									"type": "String"
 								},
 								"sink": {
-									"name": "BAIRRO",
+									"name": "bairro",
 									"type": "String"
 								}
 							},
@@ -81,7 +81,7 @@
 									"type": "String"
 								},
 								"sink": {
-									"name": "CIDADE",
+									"name": "cidade",
 									"type": "String"
 								}
 							},
@@ -91,7 +91,7 @@
 									"type": "String"
 								},
 								"sink": {
-									"name": "CEP",
+									"name": "cep",
 									"type": "String"
 								}
 							},
@@ -101,7 +101,7 @@
 									"type": "String"
 								},
 								"sink": {
-									"name": "HIERARQUIA",
+									"name": "hierarquia",
 									"type": "String"
 								}
 							}
