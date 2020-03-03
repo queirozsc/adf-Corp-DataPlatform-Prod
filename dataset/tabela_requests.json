@@ -1,0 +1,223 @@
+{
+	"name": "tabela_requests",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "azsql_bdConsolidado",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "request",
+				"type": "varchar"
+			},
+			{
+				"name": "client",
+				"type": "varchar"
+			},
+			{
+				"name": "origanal",
+				"type": "varchar"
+			},
+			{
+				"name": "curranal",
+				"type": "varchar"
+			},
+			{
+				"name": "groupanal",
+				"type": "varchar"
+			},
+			{
+				"name": "lastanal",
+				"type": "varchar"
+			},
+			{
+				"name": "lastanalgrp",
+				"type": "varchar"
+			},
+			{
+				"name": "origgroup",
+				"type": "varchar"
+			},
+			{
+				"name": "currgroup",
+				"type": "varchar"
+			},
+			{
+				"name": "lastgroup",
+				"type": "varchar"
+			},
+			{
+				"name": "category",
+				"type": "varchar"
+			},
+			{
+				"name": "rpriority",
+				"type": "varchar"
+			},
+			{
+				"name": "product",
+				"type": "varchar"
+			},
+			{
+				"name": "process",
+				"type": "varchar"
+			},
+			{
+				"name": "rstatus",
+				"type": "varchar"
+			},
+			{
+				"name": "reqtype",
+				"type": "varchar"
+			},
+			{
+				"name": "reqsource",
+				"type": "varchar"
+			},
+			{
+				"name": "reqlocation",
+				"type": "varchar"
+			},
+			{
+				"name": "orgunit",
+				"type": "varchar"
+			},
+			{
+				"name": "orgunit_root",
+				"type": "varchar"
+			},
+			{
+				"name": "opendate",
+				"type": "varchar"
+			},
+			{
+				"name": "closedate",
+				"type": "varchar"
+			},
+			{
+				"name": "closed",
+				"type": "varchar"
+			},
+			{
+				"name": "lastaction",
+				"type": "varchar"
+			},
+			{
+				"name": "lastanalyst",
+				"type": "varchar"
+			},
+			{
+				"name": "laststatus",
+				"type": "varchar"
+			},
+			{
+				"name": "lastpriority",
+				"type": "varchar"
+			},
+			{
+				"name": "lastreopen",
+				"type": "varchar"
+			},
+			{
+				"name": "lastactionatend",
+				"type": "varchar"
+			},
+			{
+				"name": "lastacttype",
+				"type": "varchar"
+			},
+			{
+				"name": "respdate",
+				"type": "varchar"
+			},
+			{
+				"name": "resptime",
+				"type": "varchar"
+			},
+			{
+				"name": "resltime",
+				"type": "varchar"
+			},
+			{
+				"name": "respmins",
+				"type": "varchar"
+			},
+			{
+				"name": "reslmins",
+				"type": "varchar"
+			},
+			{
+				"name": "respremains",
+				"type": "varchar"
+			},
+			{
+				"name": "reslremains",
+				"type": "varchar"
+			},
+			{
+				"name": "respmode",
+				"type": "varchar"
+			},
+			{
+				"name": "reslmode",
+				"type": "varchar"
+			},
+			{
+				"name": "nocompute",
+				"type": "varchar"
+			},
+			{
+				"name": "workflow",
+				"type": "varchar"
+			},
+			{
+				"name": "reqworkflow",
+				"type": "varchar"
+			},
+			{
+				"name": "origcategory",
+				"type": "varchar"
+			},
+			{
+				"name": "origproduct",
+				"type": "varchar"
+			},
+			{
+				"name": "origprocess",
+				"type": "varchar"
+			},
+			{
+				"name": "insertdate",
+				"type": "varchar"
+			},
+			{
+				"name": "qform",
+				"type": "varchar"
+			},
+			{
+				"name": "qsurvey",
+				"type": "varchar"
+			},
+			{
+				"name": "qsessionform",
+				"type": "varchar"
+			},
+			{
+				"name": "qsessionsurvey",
+				"type": "varchar"
+			},
+			{
+				"name": "data_processamento",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "requests"
+		}
+	}
+}
