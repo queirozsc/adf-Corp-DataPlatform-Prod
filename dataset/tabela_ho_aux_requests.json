@@ -1,0 +1,46 @@
+{
+	"name": "tabela_ho_aux_requests",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "azsql_bdConsolidado",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Azure SQL Tables"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "request",
+				"type": "varchar"
+			},
+			{
+				"name": "tempo_resolucao",
+				"type": "varchar"
+			},
+			{
+				"name": "prazo_resl",
+				"type": "varchar"
+			},
+			{
+				"name": "tempo_resposta",
+				"type": "varchar"
+			},
+			{
+				"name": "prazo_resp",
+				"type": "varchar"
+			},
+			{
+				"name": "data_processamento",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "ho_aux_requests"
+		}
+	}
+}
