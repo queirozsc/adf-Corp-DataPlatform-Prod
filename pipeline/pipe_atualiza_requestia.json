@@ -27,7 +27,7 @@
 					},
 					"sink": {
 						"type": "AzureSqlSink",
-						"preCopyScript": "truncate dbo.requests",
+						"preCopyScript": "TRUNCATE TABLE dbo.requests",
 						"disableMetricsCollection": false
 					},
 					"enableStaging": false,
