@@ -1,5 +1,5 @@
 {
-	"name": "tabela_Unidades",
+	"name": "tabela_unidade_negocio",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "azsql_bdConsolidado",
