@@ -1,5 +1,5 @@
 {
-	"name": "tabela_Unidades",
+	"name": "tabela_unidade_negocio",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "azsql_bdConsolidado",
@@ -9,35 +9,35 @@
 		"type": "AzureSqlTable",
 		"schema": [
 			{
-				"name": "CNPJ",
+				"name": "cnpj",
 				"type": "varchar"
 			},
 			{
-				"name": "RAZAO_SOCIAL",
+				"name": "razao_social",
 				"type": "varchar"
 			},
 			{
-				"name": "ENDERECO",
+				"name": "endereco",
 				"type": "varchar"
 			},
 			{
-				"name": "BAIRRO",
+				"name": "bairro",
 				"type": "varchar"
 			},
 			{
-				"name": "CIDADE",
+				"name": "cidade",
 				"type": "varchar"
 			},
 			{
-				"name": "CEP",
+				"name": "cep",
 				"type": "varchar"
 			},
 			{
-				"name": "HIERARQUIA",
+				"name": "hierarquia",
 				"type": "varchar"
 			},
 			{
-				"name": "DATA_CARGA",
+				"name": "data_processamento",
 				"type": "datetime",
 				"precision": 23,
 				"scale": 3
@@ -45,7 +45,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "tbUNIDADES"
+			"table": "unidade_negocio"
 		}
 	}
 }
