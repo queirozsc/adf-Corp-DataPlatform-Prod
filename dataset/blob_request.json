@@ -5,6 +5,9 @@
 			"referenceName": "blob_Cargas_DataFactory",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "Blob Storage"
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
