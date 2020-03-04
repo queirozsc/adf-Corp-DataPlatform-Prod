@@ -1,0 +1,28 @@
+{
+	"name": "blob_qanswer",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "blob_Cargas_DataFactory",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "qanswer.csv",
+				"container": "requestia"
+			},
+			"columnDelimiter": ";",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "QSESSION;QUESTION;QANSWER;QANSWERED;QANSWERDATE;QSHOW;QORDER;QUPDATED",
+				"type": "String"
+			}
+		]
+	}
+}
