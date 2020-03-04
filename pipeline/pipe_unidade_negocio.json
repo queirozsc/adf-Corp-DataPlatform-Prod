@@ -111,17 +111,28 @@
 				"inputs": [
 					{
 						"referenceName": "blob_unidades",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"filename": "UNIDADES.CSV"
+						}
 					}
 				],
 				"outputs": [
 					{
 						"referenceName": "tabela_unidade_negocio",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"tablename": "unidade_negocio"
+						}
 					}
 				]
 			}
 		],
+		"parameters": {
+			"fileName": {
+				"type": "string"
+			}
+		},
 		"folder": {
 			"name": "Logic Apps Triggers"
 		},
