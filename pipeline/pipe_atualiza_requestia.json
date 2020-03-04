@@ -667,6 +667,12 @@
 						"dependencyConditions": [
 							"Succeeded"
 						]
+					},
+					{
+						"activity": "Copia Respostas",
+						"dependencyConditions": [
+							"Succeeded"
+						]
 					}
 				],
 				"policy": {
@@ -714,7 +720,92 @@
 						"preCopyScript": "TRUNCATE TABLE dbo.qanswer",
 						"disableMetricsCollection": false
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "QSESSION",
+									"type": "String"
+								},
+								"sink": {
+									"name": "qsession",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "QUESTION",
+									"type": "String"
+								},
+								"sink": {
+									"name": "question",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "QANSWER",
+									"type": "String"
+								},
+								"sink": {
+									"name": "qanswer",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "QANSWERED",
+									"type": "String"
+								},
+								"sink": {
+									"name": "qanswered",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "QANSWERDATE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "qanswerdate",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "QSHOW",
+									"type": "String"
+								},
+								"sink": {
+									"name": "qshow",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "QORDER",
+									"type": "String"
+								},
+								"sink": {
+									"name": "qorder",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "QUPDATED",
+									"type": "String"
+								},
+								"sink": {
+									"name": "qupdated",
+									"type": "String"
+								}
+							}
+						]
+					}
 				},
 				"inputs": [
 					{
