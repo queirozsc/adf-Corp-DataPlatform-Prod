@@ -5,6 +5,9 @@
 			"referenceName": "azsql_bdConsolidado",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "Azure SQL Tables"
+		},
 		"annotations": [],
 		"type": "AzureSqlTable",
 		"schema": [
