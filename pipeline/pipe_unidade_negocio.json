@@ -1,5 +1,5 @@
 {
-	"name": "pipe_atualiza_unidades",
+	"name": "pipe_unidade_negocio",
 	"properties": {
 		"activities": [
 			{
