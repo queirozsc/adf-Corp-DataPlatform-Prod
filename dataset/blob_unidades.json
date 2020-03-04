@@ -5,6 +5,11 @@
 			"referenceName": "blob_Cargas_DataFactory",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"filename": {
+				"type": "string"
+			}
+		},
 		"folder": {
 			"name": "Blob Storage"
 		},
@@ -13,7 +18,10 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "UNIDADES.CSV",
+				"fileName": {
+					"value": "@dataset().fileName",
+					"type": "Expression"
+				},
 				"container": "cadastrosgerais"
 			},
 			"columnDelimiter": ";",
