@@ -1,0 +1,55 @@
+{
+	"name": "tabela_qanswer",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "azsql_bdConsolidado",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "qsession",
+				"type": "varchar"
+			},
+			{
+				"name": "question",
+				"type": "varchar"
+			},
+			{
+				"name": "qanswer",
+				"type": "varchar"
+			},
+			{
+				"name": "qanswered",
+				"type": "varchar"
+			},
+			{
+				"name": "qanswerdate",
+				"type": "varchar"
+			},
+			{
+				"name": "qshow",
+				"type": "varchar"
+			},
+			{
+				"name": "qorder",
+				"type": "varchar"
+			},
+			{
+				"name": "qupdated",
+				"type": "varchar"
+			},
+			{
+				"name": "data_processamento",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "qanswer"
+		}
+	}
+}
