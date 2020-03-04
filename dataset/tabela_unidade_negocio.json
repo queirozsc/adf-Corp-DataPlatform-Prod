@@ -5,6 +5,11 @@
 			"referenceName": "azsql_bdConsolidado",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"tablename": {
+				"type": "string"
+			}
+		},
 		"folder": {
 			"name": "Azure SQL Tables"
 		},
