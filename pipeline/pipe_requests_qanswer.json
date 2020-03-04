@@ -1,5 +1,5 @@
 {
-	"name": "pipe_requests_answers",
+	"name": "pipe_requests_qanswer",
 	"properties": {
 		"activities": [
 			{
