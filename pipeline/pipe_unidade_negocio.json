@@ -128,11 +128,6 @@
 				]
 			}
 		],
-		"parameters": {
-			"fileName": {
-				"type": "string"
-			}
-		},
 		"folder": {
 			"name": "Logic Apps Triggers"
 		},
