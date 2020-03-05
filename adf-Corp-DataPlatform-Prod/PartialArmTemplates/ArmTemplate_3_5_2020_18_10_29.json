@@ -1,0 +1,213 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "adf-Corp-DataPlatform-Prod"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/pipe_unidade_negocio')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "task-Copia-Unidades",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "TRUNCATE TABLE dbo.unidade_negocio",
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"enableSkipIncompatibleRow": true,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "CNPJ",
+											"type": "String"
+										},
+										"sink": {
+											"name": "cnpj",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "RAZAO_SOCIAL",
+											"type": "String"
+										},
+										"sink": {
+											"name": "razao_social",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ENDERECO",
+											"type": "String"
+										},
+										"sink": {
+											"name": "endereco",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "BAIRRO",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bairro",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "CIDADE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "cidade",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "CEP",
+											"type": "String"
+										},
+										"sink": {
+											"name": "cep",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "HIERARQUIA",
+											"type": "String"
+										},
+										"sink": {
+											"name": "hierarquia",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "blob_Unidades",
+								"type": "DatasetReference"
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "tabela_unidade_negocio",
+								"type": "DatasetReference"
+							}
+						]
+					}
+				],
+				"folder": {
+					"name": "Logic Apps Triggers"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/blob_Unidades')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/blob_Unidades')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "blob_Cargas_DataFactory",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Blob Storage"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "unidade_negocio.CSV",
+						"container": "cadastrosgerais"
+					},
+					"columnDelimiter": ";",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "#",
+						"type": "String"
+					},
+					{
+						"name": "HIERARQUIA",
+						"type": "String"
+					},
+					{
+						"name": "CNPJ",
+						"type": "String"
+					},
+					{
+						"name": "RAZAO_SOCIAL",
+						"type": "String"
+					},
+					{
+						"name": "ENDERECO",
+						"type": "String"
+					},
+					{
+						"name": "BAIRRO",
+						"type": "String"
+					},
+					{
+						"name": "CIDADE",
+						"type": "String"
+					},
+					{
+						"name": "CEP",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		}
+	]
+}

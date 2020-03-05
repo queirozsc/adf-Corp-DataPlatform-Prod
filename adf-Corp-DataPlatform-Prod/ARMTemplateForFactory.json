@@ -41,7 +41,7 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/pipe-Atualiza-Unidades')]",
+			"name": "[concat(parameters('factoryName'), '/pipe_unidade_negocio')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -195,7 +195,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "UNIDADES.CSV",
+						"fileName": "unidade_negocio.CSV",
 						"container": "cadastrosgerais"
 					},
 					"columnDelimiter": ";",
