@@ -1,14 +1,9 @@
 {
-	"name": "tabela_unidade_negocio",
+	"name": "tabela_qanswer",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "azsql_bdConsolidado",
 			"type": "LinkedServiceReference"
-		},
-		"parameters": {
-			"tablename": {
-				"type": "string"
-			}
 		},
 		"folder": {
 			"name": "Azure SQL Tables"
@@ -17,31 +12,35 @@
 		"type": "AzureSqlTable",
 		"schema": [
 			{
-				"name": "cnpj",
+				"name": "qsession",
 				"type": "varchar"
 			},
 			{
-				"name": "razao_social",
+				"name": "question",
 				"type": "varchar"
 			},
 			{
-				"name": "endereco",
+				"name": "qanswer",
 				"type": "varchar"
 			},
 			{
-				"name": "bairro",
+				"name": "qanswered",
 				"type": "varchar"
 			},
 			{
-				"name": "cidade",
+				"name": "qanswerdate",
 				"type": "varchar"
 			},
 			{
-				"name": "cep",
+				"name": "qshow",
 				"type": "varchar"
 			},
 			{
-				"name": "hierarquia",
+				"name": "qorder",
+				"type": "varchar"
+			},
+			{
+				"name": "qupdated",
 				"type": "varchar"
 			},
 			{
@@ -53,10 +52,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": {
-				"value": "@dataset().tablename",
-				"type": "Expression"
-			}
+			"table": "qanswer"
 		}
 	}
 }

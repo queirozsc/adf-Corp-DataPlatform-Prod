@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "task-Copia-Unidades",
+				"name": "Copia unidades",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -110,14 +110,20 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "blob_Unidades",
-						"type": "DatasetReference"
+						"referenceName": "blob_unidades",
+						"type": "DatasetReference",
+						"parameters": {
+							"filename": "UNIDADES.CSV"
+						}
 					}
 				],
 				"outputs": [
 					{
 						"referenceName": "tabela_unidade_negocio",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"tablename": "unidade_negocio"
+						}
 					}
 				]
 			}

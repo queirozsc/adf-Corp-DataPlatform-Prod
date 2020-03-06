@@ -1,14 +1,9 @@
 {
-	"name": "tabela_unidade_negocio",
+	"name": "tabela_ho_aux_requests",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "azsql_bdConsolidado",
 			"type": "LinkedServiceReference"
-		},
-		"parameters": {
-			"tablename": {
-				"type": "string"
-			}
 		},
 		"folder": {
 			"name": "Azure SQL Tables"
@@ -17,31 +12,23 @@
 		"type": "AzureSqlTable",
 		"schema": [
 			{
-				"name": "cnpj",
+				"name": "request",
 				"type": "varchar"
 			},
 			{
-				"name": "razao_social",
+				"name": "tempo_resolucao",
 				"type": "varchar"
 			},
 			{
-				"name": "endereco",
+				"name": "prazo_resl",
 				"type": "varchar"
 			},
 			{
-				"name": "bairro",
+				"name": "tempo_resposta",
 				"type": "varchar"
 			},
 			{
-				"name": "cidade",
-				"type": "varchar"
-			},
-			{
-				"name": "cep",
-				"type": "varchar"
-			},
-			{
-				"name": "hierarquia",
+				"name": "prazo_resp",
 				"type": "varchar"
 			},
 			{
@@ -53,10 +40,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": {
-				"value": "@dataset().tablename",
-				"type": "Expression"
-			}
+			"table": "ho_aux_requests"
 		}
 	}
 }
