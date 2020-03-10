@@ -1,0 +1,23 @@
+{
+	"name": "mssql_Smart_Oftalmoclin",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"connectionString": "Integrated Security=False;Data Source=10.0.70.156;Initial Catalog=Smart;User ID=sa",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "kv_Credentials",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "cred-admsql-oftalmoclin"
+			}
+		},
+		"connectVia": {
+			"referenceName": "ir-vm-DataPlatform",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
