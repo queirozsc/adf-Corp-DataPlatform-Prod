@@ -1,0 +1,25 @@
+{
+	"name": "Diariamente-02h30",
+	"properties": {
+		"description": "Executa diariamente, às 02h30 (horário de Brasília)",
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "pipe_requests_qanswer",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2020-03-31T05:30:00.000Z",
+				"timeZone": "UTC"
+			}
+		}
+	}
+}
