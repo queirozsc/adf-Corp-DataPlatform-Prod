@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copia Chamados",
+				"name": "Copia chamados",
 				"description": "Copia os dados do Azure Storage Account para o Azure SQL Server",
 				"type": "Copy",
 				"dependsOn": [],
@@ -552,12 +552,12 @@
 				]
 			},
 			{
-				"name": "Copia SLA Chamados",
+				"name": "Copia SLA chamados",
 				"description": "Copia os dados do Azure Storage Account para o Azure SQL Server",
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Copia Chamados",
+						"activity": "Copia chamados",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -658,18 +658,18 @@
 				]
 			},
 			{
-				"name": "Transforma Chamados",
+				"name": "Transforma chamados",
 				"description": "Normaliza valores da tabela requests",
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "Copia SLA Chamados",
+						"activity": "Copia SLA chamados",
 						"dependencyConditions": [
 							"Succeeded"
 						]
 					},
 					{
-						"activity": "Copia Respostas",
+						"activity": "Copia respostas",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -692,7 +692,7 @@
 				}
 			},
 			{
-				"name": "Copia Respostas",
+				"name": "Copia respostas",
 				"description": "Copia os dados do Azure Storage Account para o Azure SQL Server",
 				"type": "Copy",
 				"dependsOn": [],
@@ -823,7 +823,7 @@
 			}
 		],
 		"folder": {
-			"name": "Logic Apps Triggers"
+			"name": "Scheduled"
 		},
 		"annotations": []
 	}
