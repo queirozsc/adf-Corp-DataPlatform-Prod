@@ -17,6 +17,12 @@
 		"mssql_Smart_HOSL_connectionString": {
 			"value": ""
 		},
+		"mssql_Smart_IOF_connectionString": {
+			"value": ""
+		},
+		"mssql_Smart_Oftalmoclin_connectionString": {
+			"value": ""
+		},
 		"ora_Tasy_Cloud_connectionString": {
 			"value": ""
 		},

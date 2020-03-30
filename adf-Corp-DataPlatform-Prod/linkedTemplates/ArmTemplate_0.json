@@ -23,6 +23,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'mssql_Smart_HOSL'"
 		},
+		"mssql_Smart_IOF_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'mssql_Smart_IOF'"
+		},
+		"mssql_Smart_Oftalmoclin_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'mssql_Smart_Oftalmoclin'"
+		},
 		"ora_Tasy_Cloud_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ora_Tasy_Cloud'"
@@ -153,6 +161,62 @@
 							"type": "LinkedServiceReference"
 						},
 						"secretName": "cred-admsql-hosl"
+					}
+				},
+				"connectVia": {
+					"referenceName": "ir-vm-DataPlatform",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/ir-vm-DataPlatform')]",
+				"[concat(variables('factoryId'), '/linkedServices/kv_Credentials')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/mssql_Smart_IOF')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('mssql_Smart_IOF_connectionString')]",
+					"password": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "kv_Credentials",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "cred-admsql-iof"
+					}
+				},
+				"connectVia": {
+					"referenceName": "ir-vm-DataPlatform",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/ir-vm-DataPlatform')]",
+				"[concat(variables('factoryId'), '/linkedServices/kv_Credentials')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/mssql_Smart_Oftalmoclin')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('mssql_Smart_Oftalmoclin_connectionString')]",
+					"password": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "kv_Credentials",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "cred-admsql-oftalmoclin"
 					}
 				},
 				"connectVia": {
@@ -1521,7 +1585,7 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "Copia Chamados",
+						"name": "Copia chamados",
 						"description": "Copia os dados do Azure Storage Account para o Azure SQL Server",
 						"type": "Copy",
 						"dependsOn": [],
@@ -2072,12 +2136,12 @@
 						]
 					},
 					{
-						"name": "Copia SLA Chamados",
+						"name": "Copia SLA chamados",
 						"description": "Copia os dados do Azure Storage Account para o Azure SQL Server",
 						"type": "Copy",
 						"dependsOn": [
 							{
-								"activity": "Copia Chamados",
+								"activity": "Copia chamados",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -2180,18 +2244,18 @@
 						]
 					},
 					{
-						"name": "Transforma Chamados",
+						"name": "Transforma chamados",
 						"description": "Normaliza valores da tabela requests",
 						"type": "SqlServerStoredProcedure",
 						"dependsOn": [
 							{
-								"activity": "Copia SLA Chamados",
+								"activity": "Copia SLA chamados",
 								"dependencyConditions": [
 									"Succeeded"
 								]
 							},
 							{
-								"activity": "Copia Respostas",
+								"activity": "Copia respostas",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -2214,7 +2278,7 @@
 						}
 					},
 					{
-						"name": "Copia Respostas",
+						"name": "Copia respostas",
 						"description": "Copia os dados do Azure Storage Account para o Azure SQL Server",
 						"type": "Copy",
 						"dependsOn": [],
@@ -2347,7 +2411,7 @@
 					}
 				],
 				"folder": {
-					"name": "Logic Apps Triggers"
+					"name": "Scheduled"
 				},
 				"annotations": []
 			},

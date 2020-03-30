@@ -23,6 +23,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'mssql_Smart_HOSL'"
 		},
+		"mssql_Smart_IOF_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'mssql_Smart_IOF'"
+		},
+		"mssql_Smart_Oftalmoclin_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'mssql_Smart_Oftalmoclin'"
+		},
 		"ora_Tasy_Cloud_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ora_Tasy_Cloud'"
@@ -74,6 +82,12 @@
 					"mssql_Smart_HOSL_connectionString": {
 						"value": "[parameters('mssql_Smart_HOSL_connectionString')]"
 					},
+					"mssql_Smart_IOF_connectionString": {
+						"value": "[parameters('mssql_Smart_IOF_connectionString')]"
+					},
+					"mssql_Smart_Oftalmoclin_connectionString": {
+						"value": "[parameters('mssql_Smart_Oftalmoclin_connectionString')]"
+					},
 					"ora_Tasy_Cloud_connectionString": {
 						"value": "[parameters('ora_Tasy_Cloud_connectionString')]"
 					},
@@ -86,6 +100,26 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_0')]"
+			]
 		}
 	]
 }

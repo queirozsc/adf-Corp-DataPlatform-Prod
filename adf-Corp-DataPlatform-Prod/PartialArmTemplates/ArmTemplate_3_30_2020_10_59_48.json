@@ -1,0 +1,879 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "adf-Corp-DataPlatform-Prod"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/pipe_requests_qanswer')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copia chamados",
+						"description": "Copia os dados do Azure Storage Account para o Azure SQL Server",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "TRUNCATE TABLE dbo.requests",
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "REQUEST",
+											"type": "String"
+										},
+										"sink": {
+											"name": "request",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "CLIENT",
+											"type": "String"
+										},
+										"sink": {
+											"name": "client",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ORIGANAL",
+											"type": "String"
+										},
+										"sink": {
+											"name": "origanal",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "CURRANAL",
+											"type": "String"
+										},
+										"sink": {
+											"name": "curranal",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "GROUPANAL",
+											"type": "String"
+										},
+										"sink": {
+											"name": "groupanal",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "LASTANAL",
+											"type": "String"
+										},
+										"sink": {
+											"name": "lastanal",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "LASTANLGRP",
+											"type": "String"
+										},
+										"sink": {
+											"name": "lastanlgrp",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ORIGGROUP",
+											"type": "String"
+										},
+										"sink": {
+											"name": "origgroup",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "CURRGROUP",
+											"type": "String"
+										},
+										"sink": {
+											"name": "currgroup",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "LASTGROUP",
+											"type": "String"
+										},
+										"sink": {
+											"name": "lastgroup",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "CATEGORY",
+											"type": "String"
+										},
+										"sink": {
+											"name": "category",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "RPRIORITY",
+											"type": "String"
+										},
+										"sink": {
+											"name": "rpriority",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "PRODUCT",
+											"type": "String"
+										},
+										"sink": {
+											"name": "product",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "PROCESS",
+											"type": "String"
+										},
+										"sink": {
+											"name": "process",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "RSTATUS",
+											"type": "String"
+										},
+										"sink": {
+											"name": "rstatus",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "REQTYPE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "reqtype",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "REQSOURCE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "reqsource",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "LOCATION",
+											"type": "String"
+										},
+										"sink": {
+											"name": "reqlocation",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ORGUNIT",
+											"type": "String"
+										},
+										"sink": {
+											"name": "orgunit",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ORGUNIT_ROOT",
+											"type": "String"
+										},
+										"sink": {
+											"name": "orgunit_root",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "OPENDATE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "opendate",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "CLOSEDATE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "closedate",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "CLOSED",
+											"type": "String"
+										},
+										"sink": {
+											"name": "closed",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "LASTACTION",
+											"type": "String"
+										},
+										"sink": {
+											"name": "lastaction",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "LASTANALYST",
+											"type": "String"
+										},
+										"sink": {
+											"name": "lastanalyst",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "LASTSTATUS",
+											"type": "String"
+										},
+										"sink": {
+											"name": "laststatus",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "LASTPRIORITY",
+											"type": "String"
+										},
+										"sink": {
+											"name": "lastpriority",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "LASTREOPEN",
+											"type": "String"
+										},
+										"sink": {
+											"name": "lastreopen",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "LASTACTIONATEND",
+											"type": "String"
+										},
+										"sink": {
+											"name": "lastactionatend",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "LASTACTTYPE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "lastacttype",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "RESPDATE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "respdate",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "RESPTIME",
+											"type": "String"
+										},
+										"sink": {
+											"name": "resptime",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "RESLTIME",
+											"type": "String"
+										},
+										"sink": {
+											"name": "resltime",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "RESPMINS",
+											"type": "String"
+										},
+										"sink": {
+											"name": "respmins",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "RESLMINS",
+											"type": "String"
+										},
+										"sink": {
+											"name": "reslmins",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "RESPREMAINS",
+											"type": "String"
+										},
+										"sink": {
+											"name": "respremains",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "RESLREMAINS",
+											"type": "String"
+										},
+										"sink": {
+											"name": "reslremains",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "RESPMODE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "respmode",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "RESLMODE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "reslmode",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "NOCOMPUTE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "nocompute",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "WORKFLOW",
+											"type": "String"
+										},
+										"sink": {
+											"name": "workflow",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "REQWORKFLOW",
+											"type": "String"
+										},
+										"sink": {
+											"name": "reqworkflow",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ORIGCATEGORY",
+											"type": "String"
+										},
+										"sink": {
+											"name": "origcategory",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ORIGPRODUCT",
+											"type": "String"
+										},
+										"sink": {
+											"name": "origproduct",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ORIGPROCESS",
+											"type": "String"
+										},
+										"sink": {
+											"name": "origprocess",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "INSERTDATE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "insertdate",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "QFORM",
+											"type": "String"
+										},
+										"sink": {
+											"name": "qform",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "QSURVEY",
+											"type": "String"
+										},
+										"sink": {
+											"name": "qsurvey",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "QSESSIONFORM",
+											"type": "String"
+										},
+										"sink": {
+											"name": "qsessionform",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "QSESSIONSURVEY",
+											"type": "String"
+										},
+										"sink": {
+											"name": "qsessionsurvey",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "blob_request",
+								"type": "DatasetReference"
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "tabela_requests",
+								"type": "DatasetReference"
+							}
+						]
+					},
+					{
+						"name": "Copia SLA chamados",
+						"description": "Copia os dados do Azure Storage Account para o Azure SQL Server",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Copia chamados",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "TRUNCATE TABLE dbo.ho_aux_requests",
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "REQUEST",
+											"type": "String"
+										},
+										"sink": {
+											"name": "request",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "TEMPO_RESOLUCAO",
+											"type": "String"
+										},
+										"sink": {
+											"name": "tempo_resolucao",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "PRAZO_RESL",
+											"type": "String"
+										},
+										"sink": {
+											"name": "prazo_resl",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "TEMPO_REPOSTA",
+											"type": "String"
+										},
+										"sink": {
+											"name": "tempo_resposta",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "PRAZO_RESP",
+											"type": "String"
+										},
+										"sink": {
+											"name": "prazo_resp",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "blob_ho_aux_requests",
+								"type": "DatasetReference"
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "tabela_ho_aux_requests",
+								"type": "DatasetReference"
+							}
+						]
+					},
+					{
+						"name": "Transforma chamados",
+						"description": "Normaliza valores da tabela requests",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Copia SLA chamados",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Copia respostas",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[transform_requests]"
+						},
+						"linkedServiceName": {
+							"referenceName": "azsql_bdConsolidado",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Copia respostas",
+						"description": "Copia os dados do Azure Storage Account para o Azure SQL Server",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "TRUNCATE TABLE dbo.qanswer",
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"enableSkipIncompatibleRow": true,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "QSESSION",
+											"type": "String"
+										},
+										"sink": {
+											"name": "qsession",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "QUESTION",
+											"type": "String"
+										},
+										"sink": {
+											"name": "question",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "QANSWER",
+											"type": "String"
+										},
+										"sink": {
+											"name": "qanswer",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "QANSWERED",
+											"type": "String"
+										},
+										"sink": {
+											"name": "qanswered",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "QANSWERDATE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "qanswerdate",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "QSHOW",
+											"type": "String"
+										},
+										"sink": {
+											"name": "qshow",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "QORDER",
+											"type": "String"
+										},
+										"sink": {
+											"name": "qorder",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "QUPDATED",
+											"type": "String"
+										},
+										"sink": {
+											"name": "qupdated",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "blob_qanswer",
+								"type": "DatasetReference"
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "tabela_qanswer",
+								"type": "DatasetReference"
+							}
+						]
+					}
+				],
+				"folder": {
+					"name": "Scheduled"
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Diariamente-02h30')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Executa diariamente, às 02h30 (horário de Brasília)",
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "pipe_requests_qanswer",
+							"type": "PipelineReference"
+						}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Day",
+						"interval": 1,
+						"startTime": "2020-03-31T05:30:00.000Z",
+						"timeZone": "UTC"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/pipe_requests_qanswer')]"
+			]
+		}
+	]
+}
